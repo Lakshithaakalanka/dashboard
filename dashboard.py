@@ -4,13 +4,32 @@ import streamlit as st
 import plotly.express as px
 from textblob import TextBlob
 
+
 # Load the dataset
-file_path = r'C:\Users\User\Downloads\New folder (4)\McDonald_s_Reviews.csv'
+#file_path = r'C:\Users\User\Downloads\New folder (4)\McDonald_s_Reviews.csv'
+#if os.path.exists(file_path):
+#    mcdonalds_data = pd.read_csv(file_path, encoding='ISO-8859-1')
+#else:
+#    st.error("Dataset not found. Please make sure the file 'McDonald_s_Reviews.csv' is in the specified directory.")
+#    st.stop()
+
+
+# Construct the file path using os.path.join
+file_path = os.path.join('C:', 'Users', 'User', 'Downloads', 'New folder (4)', 'McDonald_s_Reviews.csv')
+
+# Print debugging information
+print("Current working directory:", os.getcwd())
+print("File path:", file_path)
+
+# Check if the file exists
 if os.path.exists(file_path):
+    # Load the dataset
     mcdonalds_data = pd.read_csv(file_path, encoding='ISO-8859-1')
 else:
+    # Display an error message and stop the app
     st.error("Dataset not found. Please make sure the file 'McDonald_s_Reviews.csv' is in the specified directory.")
     st.stop()
+
 
 # Sentiment Analysis
 mcdonalds_data['sentiment'] = mcdonalds_data['review'].apply(lambda x: TextBlob(str(x)).sentiment.polarity)
