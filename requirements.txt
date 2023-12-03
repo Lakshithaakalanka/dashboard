@@ -1,6 +1,4 @@
-pip
 streamlit
 pandas
-os
 textblob
 plotly
